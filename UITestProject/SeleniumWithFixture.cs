@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using UITestProject.Pages;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 using Xunit.Abstractions;
@@ -23,36 +24,29 @@ namespace UITestProject
         {
             var driver = webDriverFixture.ChromeDriver;
             outputHelper.WriteLine("FillDataTest");
-            driver
-                .Navigate()
-                .GoToUrl("https://the-internet.herokuapp.com/add_remove_elements/");
+
+            var homePage = new HomePage(driver);
+            homePage.Open();
+            homePage.AddRemoveElementsLink.Click();
 
             outputHelper.WriteLine("- first click");
-            var addElementButton = driver.FindElement(By.XPath("//*[@id=\"content\"]/div/button"));
-            addElementButton.Click();
+            var addRemoveElementsPage = new AddRemoveElementsPage(driver);
+            addRemoveElementsPage.AddElementButton.Click();
+            addRemoveElementsPage.WaitForDeleteButton();
 
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            IWebElement firstResult = wait.Until(e => e.FindElement(By.CssSelector(".added-manually")));
-
-            var elements = driver.FindElements(By.CssSelector(".added-manually"));
-            Assert.True(elements.Count == 1);
+            Assert.True(addRemoveElementsPage.DeleteButtons.Count == 1);
 
             outputHelper.WriteLine("- second click");
-            addElementButton.Click();
+            addRemoveElementsPage.AddElementButton.Click();
+            addRemoveElementsPage.WaitForDeleteButtonCount(2);
 
-            wait.Until(e => e.FindElements(By.CssSelector(".added-manually")).Count > 1);
+            Assert.True(addRemoveElementsPage.DeleteButtons.Count == 2);
 
-            elements = driver.FindElements(By.CssSelector(".added-manually"));
-            Assert.True(elements.Count == 2);
-
-            var secondDeleteButton = driver.FindElement(By.XPath("//*[@id=\"elements\"]/button[2]"));
             outputHelper.WriteLine("- second delete click");
-            secondDeleteButton.Click();
+            addRemoveElementsPage.DeleteButtons[1].Click();
+            addRemoveElementsPage.WaitForDeleteButtonCount(1);
 
-            wait.Until(e => e.FindElements(By.CssSelector(".added-manually")).Count < 2);
-
-            elements = driver.FindElements(By.CssSelector(".added-manually"));
-            Assert.True(elements.Count == 1);
+            Assert.True(addRemoveElementsPage.DeleteButtons.Count == 1);
         }
     }
 }
