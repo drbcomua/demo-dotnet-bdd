@@ -26,7 +26,7 @@ namespace UITestProject.Steps
         }
 
         [Given("I opened Add Remove Elements Page")]
-        public void iOpenedAddRemoveElementsPage()
+        public void IOpenedAddRemoveElementsPage()
         {
             outputHelper.WriteLine("iOpenedAddRemoveElementsPage");
 
@@ -36,7 +36,7 @@ namespace UITestProject.Steps
 
         [Given("I click Add Elements button")]
         [When("I click Add Elements button")]
-        public void iClickAddElementsButton()
+        public void IClickAddElementsButton()
         {
             outputHelper.WriteLine("iClickAddElementsButton");
 
@@ -45,7 +45,7 @@ namespace UITestProject.Steps
         }
 
         [Then("New Delete button appears on page")]
-        public void newDeleteButtonAppearsOnPage()
+        public void NewDeleteButtonAppearsOnPage()
         {
             Assert.True(addRemoveElementsPage.DeleteButtons.Count == 1);
         }
