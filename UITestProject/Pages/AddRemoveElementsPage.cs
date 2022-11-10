@@ -18,13 +18,13 @@ namespace UITestProject.Pages
 
         public void WaitForDeleteButton()
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new(driver, TimeSpan.FromSeconds(10));
             wait.Until(e => e.FindElement(By.CssSelector(".added-manually")));
         }
 
         public void WaitForDeleteButtonCount(int num)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new(driver, TimeSpan.FromSeconds(10));
             wait.Until(e => e.FindElements(By.CssSelector(".added-manually")).Count == num);
         }
     }

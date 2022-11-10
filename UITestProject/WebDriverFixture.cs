@@ -9,7 +9,7 @@ using WebDriverManager;
 
 namespace UITestProject
 {
-    public class WebDriverFixture : IDisposable
+    public sealed class WebDriverFixture : IDisposable
     {
         public ChromeDriver ChromeDriver { get; private set; }
         public WebDriverFixture()
@@ -22,6 +22,7 @@ namespace UITestProject
         {
             ChromeDriver.Quit();
             ChromeDriver.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }
