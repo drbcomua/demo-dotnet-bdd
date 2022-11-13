@@ -1,9 +1,11 @@
-﻿using RestSharp;
+﻿using Allure.Xunit.Attributes;
+using RestSharp;
 using Xunit;
 using Xunit.Abstractions;
 
 namespace APITestProject
 {
+    [AllureSuite("Dice Roller Test")]
     public class DiceRollerTest
     {
         const int diceSides = 6;
@@ -14,7 +16,21 @@ namespace APITestProject
             this.outputHelper = outputHelper;
         }
 
-        [Theory]
+        //[AllureXunit(DisplayName = "Should Have Enough Enthropy With 100 Samples Test")]
+        //public void ShouldHaveEnoughEnthropyWith100SamplesTest()
+        //{
+        //    int numOfROlls = 100;
+        //    double maxDevaiation  = 0.05;
+        //    int[] rolls = GetRolls(numOfROlls);
+        //    for (int i = 0; i < diceSides; ++i)
+        //    {
+        //        outputHelper.WriteLine($"[{i + 1}]: {rolls[i]}/{numOfROlls}");
+        //        Assert.True(Deviation(rolls[i], diceSides, numOfROlls) < maxDevaiation,
+        //            $"Side [{i + 1}] appeared {rolls[i]} times of {numOfROlls} so deviation {Deviation(rolls[i], diceSides, numOfROlls)} is greater than {maxDevaiation}");
+        //    }
+        //}
+
+        [AllureXunitTheory]
         [MemberData(nameof(Data))]
         public void EnoughEnthropyTest(int numOfROlls, double maxDevaiation)
         {
@@ -44,7 +60,7 @@ namespace APITestProject
 
             var response = client.Get<ResultObj>(request);
 
-            response.listeDes.ForEach(i => { Console.WriteLine($"{i.resultat}; "); ++result[i.resultat - 1]; });
+            response.listeDes.ForEach(i => ++result[i.resultat - 1]);
 
             return result;
         }

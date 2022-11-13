@@ -14,7 +14,6 @@
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
 	</PackageReference>
-    <PackageReference Include="RestSharp" Version="108.0.2" />
     <PackageReference Include="Selenium.WebDriver" Version="4.6.0" />
     <PackageReference Include="SpecFlow" Version="3.9.74" />
     <PackageReference Include="SpecFlow.Allure" Version="3.5.0.73" />
