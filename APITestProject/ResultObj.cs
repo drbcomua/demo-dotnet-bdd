@@ -2,10 +2,10 @@
 {
     public class ResultObj
     {
-        public int nbDes { get; set; }
-        public int nbFaces { get; set; }
-        public int somme { get; set; }
-        public double moyenne { get; set; }
-        public List<Resultat> listeDes { get; set; }
+        public int NbDes { get; set; }
+        public int NbFaces { get; set; }
+        public int Somme { get; set; }
+        public double Moyenne { get; set; }
+        public List<Resultat>? ListeDes { get; set; }
     }
 }

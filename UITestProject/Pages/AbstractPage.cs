@@ -6,7 +6,7 @@ namespace UITestProject.Pages
     {
         public readonly IWebDriver driver;
 
-        public AbstractPage(IWebDriver driver)
+        protected AbstractPage(IWebDriver driver)
         {
             this.driver = driver;
         }
