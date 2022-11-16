@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
@@ -10,10 +10,10 @@ namespace UITestProject
         public IWebDriver Driver { get; private set; }
         public WebDriverFixture()
         {
-            new DriverManager().SetUpDriver(new FirefoxConfig());
-            FirefoxOptions options = new();
+            new DriverManager().SetUpDriver(new ChromeConfig());
+            ChromeOptions options = new();
             options.AddArguments("--headless");
-            Driver = new FirefoxDriver(options);
+            Driver = new ChromeDriver(options);
         }
 
         public void Dispose()
