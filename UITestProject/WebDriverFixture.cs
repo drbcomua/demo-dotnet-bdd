@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
@@ -6,17 +7,17 @@ namespace UITestProject
 {
     public sealed class WebDriverFixture : IDisposable
     {
-        public ChromeDriver ChromeDriver { get; private set; }
+        public IWebDriver Driver { get; private set; }
         public WebDriverFixture()
         {
-            var driver = new DriverManager().SetUpDriver(new ChromeConfig());
-            ChromeDriver = new ChromeDriver(driver);
+            new DriverManager().SetUpDriver(new FirefoxConfig());
+            Driver = new FirefoxDriver();
         }
 
         public void Dispose()
         {
-            ChromeDriver.Quit();
-            ChromeDriver.Dispose();
+            Driver.Quit();
+            Driver.Dispose();
             GC.SuppressFinalize(this);
         }
     }

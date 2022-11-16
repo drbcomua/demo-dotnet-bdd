@@ -14,7 +14,7 @@ namespace UITestProject.Steps
         public AddRemoveElementsStepDefinitions(WebDriverFixture webDriverFixture, ITestOutputHelper outputHelper)
         {
             this.outputHelper = outputHelper;
-            var driver = webDriverFixture.ChromeDriver;
+            var driver = webDriverFixture.Driver;
             this.homePage = new HomePage(driver);
             this.addRemoveElementsPage = new AddRemoveElementsPage(driver);
         }
