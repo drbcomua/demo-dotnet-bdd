@@ -11,7 +11,9 @@ namespace UITestProject
         public WebDriverFixture()
         {
             new DriverManager().SetUpDriver(new FirefoxConfig());
-            Driver = new FirefoxDriver();
+            FirefoxOptions options = new();
+            options.AddArguments("--headless");
+            Driver = new FirefoxDriver(options);
         }
 
         public void Dispose()
