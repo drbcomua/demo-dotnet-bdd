@@ -1,12 +1,28 @@
 pipeline {
     agent any
     stages {
+        stage('Git') {
+            steps {
+                git branch: 'main', url: 'https://github.com/drbcomua/demo-dotnet-bdd/'
+            }
+        }
+        stage('Clean') {
+            steps {
+                dotnetClean()
+            }
+        }
         stage('Run Tests') {
             steps {
+                catchError {
+                    dotnetTest sdk: 'net60'
+                }
+                echo currentBuild.result
+            }
+        }
+        stage('Reports') {
+            steps {
                 script {
-                    docker.image('mcr.microsoft.com/dotnet/sdk:6.0').inside('-v ${WORKSPACE}:/src -v /var/nuget/:/tmp/nuget/ -e NUGET_PACKAGES=/tmp/nuget/packages -e DOTNET_CLI_HOME=/tmp/dotnet') { c -> 
-                        sh 'cd /src; dotnet publish -c Release '
-                    }
+                    allure includeProperties: false, jdk: '', results: [[path: 'UITestProject/bin/Debug/net6.0/allure-results'], [path: 'APITestProject/bin/Debug/net6.0/allure-results']]
                 }
             }
         }
