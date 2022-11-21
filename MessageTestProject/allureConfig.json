@@ -1,0 +1,18 @@
+{
+  "allure": {
+    "directory": "allure-results",
+    "links": [
+      "{link}",
+      "{issue}",
+      "{tms}"
+    ]
+  },
+  "labels": {
+    "owner": "^owner:?(.+)",
+    "severity": "^(normal|blocker|critical|minor|trivial)"
+  },
+  "links": {
+    "issue": "^issue:(\\d+)",
+    "tms": "^tms:(\\d+)"
+  }
+}
