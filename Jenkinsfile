@@ -22,7 +22,7 @@ pipeline {
         stage('Reports') {
             steps {
                 script {
-                    allure includeProperties: false, jdk: '', results: [[path: 'UITestProject/bin/Debug/net6.0/allure-results'], [path: 'APITestProject/bin/Debug/net6.0/allure-results']]
+                    allure includeProperties: false, jdk: '', results: [[path: 'UITestProject/bin/Debug/net6.0/allure-results'], [path: 'APITestProject/bin/Debug/net6.0/allure-results'], [path: 'MessageTestProject/bin/Debug/net6.0/allure-results']]
                 }
             }
         }
