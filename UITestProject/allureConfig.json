@@ -16,7 +16,7 @@
     "grouping": {
       "suites": {
         "parentSuite": "^parentSuite:?(.+)",
-        "suite": "^suite:?(.+)",
+        "suite": "^suite:*",
         "subSuite": "^subSuite:?(.+)"
       },
       "behaviors": {

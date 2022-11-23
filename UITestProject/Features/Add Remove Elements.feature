@@ -1,4 +1,4 @@
-﻿@addRemoveElements @all @suite:UI
+﻿@addRemoveElements @all @suite:Add_Remove_Elements_(UI)
 Feature: Add Remove Elements
 	Tests demonstrate features of dynamic UI interaction
 
