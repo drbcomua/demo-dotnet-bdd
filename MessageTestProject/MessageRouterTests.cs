@@ -6,7 +6,7 @@ using Xunit.Abstractions;
 
 namespace MessageTestProject
 {
-    [AllureSuite("Message Routing Test")]
+    [AllureSuite("Message Routing Test (RabbitMQ)")]
     public class MessageRouterTests
     {
         private readonly ITestOutputHelper outputHelper;

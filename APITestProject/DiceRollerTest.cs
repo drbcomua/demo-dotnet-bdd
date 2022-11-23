@@ -5,7 +5,7 @@ using Xunit.Abstractions;
 
 namespace APITestProject
 {
-    [AllureSuite("Dice Roller Test")]
+    [AllureSuite("Dice Roller Test (API)")]
     public class DiceRollerTest
     {
         const int diceSides = 6;
