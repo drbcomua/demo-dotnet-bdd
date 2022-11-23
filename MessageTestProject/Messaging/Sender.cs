@@ -2,13 +2,14 @@
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using System.Text;
+using Xunit.Abstractions;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace MessageTestProject.Messaging
 {
     static class Sender
     {
-        public static void Send(Message m)
+        public static void Send(Message m, ITestOutputHelper outputHelper)
         {
             var hostName = Environment.GetEnvironmentVariable("DR_HOSTNAME");
             var userName = Environment.GetEnvironmentVariable("DR_USERNAME");
@@ -31,7 +32,7 @@ namespace MessageTestProject.Messaging
                                  routingKey: outQueue,
                                  basicProperties: null,
                                  body: body);
-            Console.WriteLine(" [x] Sent:\n{0}", message);
+            outputHelper.WriteLine(" [x] Sent:\n{0}", message);
         }
     }
 }

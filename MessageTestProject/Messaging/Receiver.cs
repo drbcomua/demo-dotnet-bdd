@@ -3,12 +3,13 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
+using Xunit.Abstractions;
 
 namespace MessageTestProject.Messaging
 {
     static class Receiver
     {
-        public static Message Receive()
+        public static Message Receive(ITestOutputHelper outputHelper)
         {
             var hostName = Environment.GetEnvironmentVariable("DR_HOSTNAME");
             var userName = Environment.GetEnvironmentVariable("DR_USERNAME");
@@ -32,8 +33,7 @@ namespace MessageTestProject.Messaging
                 var body = ea.Body.ToArray();
                 var messageJson = Encoding.UTF8.GetString(body);
                 message = JsonConvert.DeserializeObject<Message>(messageJson);
-                Console.WriteLine(" [x] Received {0}", messageJson);
-                if (message is not null) Sender.Send(message);
+                outputHelper.WriteLine(" [x] Received {0}", messageJson);
             };
             channel.BasicConsume(queue: inQueue,
                                  autoAck: true,
@@ -42,7 +42,8 @@ namespace MessageTestProject.Messaging
             while (message is null)
             { 
                 Thread.Sleep(1000);
-                if (--count <= 0) return null;
+                outputHelper.WriteLine(" [!] Count: {0}", count);
+                if (--count <= 0) return new Message();
             }
             return message;
         }
